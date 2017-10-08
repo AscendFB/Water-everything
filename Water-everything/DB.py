@@ -88,7 +88,6 @@ class DB(object):
                         #'radius': point['radius']})            #We don't need radius for watering.
             self.plants['known'] = plants
             self.sorted_coords = sorted(self.plants['known'])
-            print (self.sorted_coords)
 
 
 
