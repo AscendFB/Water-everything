@@ -9,7 +9,7 @@ import numpy as np
 import CeleryPy
 from CeleryPy import log
 import ENV
-from operator import itemgetter, attrgetter, methodcaller
+
 
 
 
