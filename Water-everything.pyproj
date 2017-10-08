@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>4393c741-211c-4b69-a092-ad9b5a028b51</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Water-All\script.py</StartupFile>
+    <StartupFile>Water-everything\script.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -26,14 +26,14 @@
     <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Water-All\" />
+    <Folder Include="Water-everything\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Water-All\CeleryPy.py" />
-    <Compile Include="Water-All\DB.py" />
-    <Compile Include="Water-All\ENV.py" />
-    <Compile Include="Water-All\script.py" />
-    <Compile Include="Water-All\__init__.py" />
+    <Compile Include="Water-everything\CeleryPy.py" />
+    <Compile Include="Water-everything\DB.py" />
+    <Compile Include="Water-everything\ENV.py" />
+    <Compile Include="Water-everything\script.py" />
+    <Compile Include="Water-everything\__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="manifest.json" />
