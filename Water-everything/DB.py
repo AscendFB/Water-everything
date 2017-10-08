@@ -24,6 +24,7 @@ class DB(object):
         self.water_seq = {'seq_id': []}
         self.seq = {'all_sequences' : []}
         self.sorted_coords = {'sorted':[]}
+        self.found_sequence=0
 
         self.seq_number = []
 
@@ -102,32 +103,47 @@ class DB(object):
 
 
     def load_sequences_from_app(self):
+        water_seq = []
+        sequences = []
+        seq_number = []
         response = self.api_get('sequences')
         app_sequences = response.json()
         if response.status_code == 200:
-            sequences = []
-            water_seq = []
             for seq in app_sequences:
                 if seq['kind'] == 'sequence':
                  sequences.append({
                    'sequence_name': seq['name'],
                    'sequence_id' : seq['id']})
                 if seq['name'] == 'FW_water_everything':
-                    water_seq.append({
-                        seq['id']})
-            self.seq['all_sequences'] = sequences
-            self.water_seq['seq_id'] = water_seq
-            self.seq_number = seq[u'id']
+                  water_seq.append(
+                   seq['id'])
+                  log("Sequence found.", message_type= 'info', title= 'Water-everything')
+                  self.found_sequence=1
+                else:
+                    water_seq[:] = []
+                    self.water_seq = water_seq
+#            self.seq['all_sequences'] = sequences
+#            water_seq = self.seq_number
+#            water_seq = self.water_seq
+            water_seq = [int(i) for i in water_seq]
+#           print (self.water_seq[0])
 
+
+
+       
            
 
     def loop_plant_points(self): 
         #plant_count=len(self.plants['known'])
-                for plant in self.sorted_coords:
+        if self.found_sequence == 1 :
+            for plant in self.sorted_coords:
                    CeleryPy.move_absolute(
                     location=[plant['x'],plant['y'] ,0],
                     offset=[0, 0, 0],
                     speed=800)
-                   CeleryPy.execute_sequence(sequence_id=self.seq_number)
+                   CeleryPy.execute_sequence(sequence_id=self.water_seq[0])
+        else:
+            log("Can't find sequence called 'FW_water_everything'", message_type= 'error', title= 'Water-everything')            
 
 
+          
