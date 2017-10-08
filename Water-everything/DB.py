@@ -9,6 +9,7 @@ import numpy as np
 import CeleryPy
 from CeleryPy import log
 import ENV
+from operator import itemgetter, attrgetter, methodcaller
 
 
 
@@ -22,6 +23,7 @@ class DB(object):
                        'remove': [], 'safe_remove': []}
         self.water_seq = {'seq_id': []}
         self.seq = {'all_sequences' : []}
+        self.sorted_coords = {'sorted':[]}
 
         self.seq_number = []
 
@@ -67,6 +69,10 @@ class DB(object):
             error_string += '{} {} errors '.format(value, key)
         print(error_string)
 
+
+
+
+
  
     def load_plants_from_web_app(self):
         """Download known plants from the FarmBot Web App API."""
@@ -78,9 +84,12 @@ class DB(object):
                 if point['pointer_type'] == 'Plant':
                     plants.append({
                         'x': point['x'],
-                        'y': point['y'],
-                        'radius': point['radius']})
+                        'y': point['y'],})
+                        #'radius': point['radius']})            #We don't need radius for watering.
             self.plants['known'] = plants
+            self.sorted_coords = sorted(self.plants['known'])
+            print (self.sorted_coords)
+
 
 
     def count_downloaded_plants(self):
@@ -89,6 +98,7 @@ class DB(object):
             ,message_type= 'info',title= 'Water-everything')
              
        
+
         
 
 
@@ -114,7 +124,7 @@ class DB(object):
 
     def loop_plant_points(self): 
         #plant_count=len(self.plants['known'])
-                for plant in self.plants['known']:
+                for plant in self.sorted_coords:
                    CeleryPy.move_absolute(
                     location=[plant['x'],plant['y'] ,0],
                     offset=[0, 0, 0],
