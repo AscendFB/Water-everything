@@ -6,9 +6,12 @@ import json
 import base64
 import requests
 import numpy as np
-from plant_detection import CeleryPy
-from plant_detection import ENV
-f
+import CeleryPy
+from CeleryPy import log
+import ENV
+
+
+
 
 
 class DB(object):
@@ -18,7 +21,7 @@ class DB(object):
         self.plants = {'known': [], 'save': [],
                        'remove': [], 'safe_remove': []}
         self.water_seq = {'seq_id': []}
-        self.seq = {'ready_seq' : []}
+        self.seq = {'all_sequences' : []}
 
         self.seq_number = []
 
@@ -81,36 +84,11 @@ class DB(object):
 
 
     def count_downloaded_plants(self):
-        plant_count = len(self.plants[plants])
+        plant_count = len(self.plants['known'])
         log(plant_count,message_type= 'info',title= 'Water-All')
-        
-          
+             
        
-
-    def print_identified(self):
-        """Output text including data about identified detected plants."""
-        def _identified_plant_text_output(title, action, plants):
-            print("\n{} {}.".format(
-                len(self.plants[plants]), title))
-            if len(self.plants[plants]) > 0:
-                print("Plants at the following machine coordinates "
-                      "( X Y ) with R = radius {}:".format(action))
-            for plant in self.plants[plants]:
-                print("    ( {x:5.0f} {y:5.0f} ) R = {r:.0f}".format(
-                    x=plant['x'],
-                    y=plant['y'],
-                    r=plant['radius']))
-
-                  
-
-
-        # Print known
-        _identified_plant_text_output(
-            title='known plants inputted',
-            action='are to be saved',
-            plants='known')
-
-
+        
 
 
     def load_sequences_from_app(self):
@@ -127,41 +105,19 @@ class DB(object):
                 if seq['name'] == 'FW_water_all':
                     water_seq.append({
                         seq['id']})
-            self.seq['ready_seq'] = sequences
+            self.seq['all_sequences'] = sequences
             self.water_seq['seq_id'] = water_seq
-            #print (self.water_seq['seq_id'])
             self.seq_number = seq[u'id']
-            print (self.seq_number)
 
-
-
-
-    #def ex_sequence(self):
-    #    CeleryPy.execute_sequence(sequence_id=self.seq_number)                                    
-                    
-
-            
+           
 
     def loop_plant_points(self): 
-        count =0
-        plant_count=len(self.plants['known'])
-        while count<2:                   
+        #plant_count=len(self.plants['known'])
                 for plant in self.plants['known']:
-                      CeleryPy.move_absolute(
+                   CeleryPy.move_absolute(
                     location=[plant['x'],plant['y'] ,0],
                     offset=[0, 0, 0],
                     speed=800)
-                      count+=1
+                   CeleryPy.execute_sequence(sequence_id=self.seq_number)
 
-                      CeleryPy.execute_sequence(sequence_id=self.seq_number)
-                      #self.water_sequence()
 
-                      
-                                       
-                
-                                
-                                     
-    def water_sequence(self):
-                      CeleryPy.write_pin(number=10,value=1,mode=0)
-                      CeleryPy.wait(5000)
-                      CeleryPy.write_pin(number=10,value =0,mode =0)        

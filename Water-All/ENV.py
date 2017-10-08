@@ -11,7 +11,7 @@ except ImportError:
     REDIS = False
 else:
     REDIS = True
-from plant_detection import CeleryPy
+from CeleryPy import *
 
 
 def _load_json(string):
