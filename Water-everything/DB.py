@@ -134,16 +134,16 @@ class DB(object):
            
 
     def loop_plant_points(self): 
-        count = 0
+        #count = 0                               Counter to limit the points for tests.      
         if self.found_sequence == 1 :
             for plant in self.sorted_coords:
-                if count < 3:
+                #if count < 3:
                    CeleryPy.move_absolute(
                     location=[plant['x'],plant['y'] ,0],
                     offset=[0, 0, 0],
                     speed=800)
                    CeleryPy.execute_sequence(sequence_id= self.seq_number)
-                   count +=1
+                   #count +=1
         else:
             log("Can't find sequence called 'FW_water_everything'", message_type= 'error', title= 'Water-everything')            
 
