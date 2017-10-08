@@ -8,5 +8,5 @@
  "url": "https://raw.githubusercontent.com/AscendFB/Water-everything/master/manifest.json",
  "zip": "https://github.com/AscendFB/Water-everything/archive/master.zip",
  "executable": "python",
- "args": ["Water-everything/Water-everything/script.py"]
+ "args": ["Water-everything-master/Water-everything/script.py"]
 }

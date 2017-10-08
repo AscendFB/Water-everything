@@ -19,7 +19,7 @@ if __name__ == "__main__":
 
     plantdb= DB()
 
-    #plantdb.load_plants_from_web_app()   #Get plant points from Webapp
-    #plantdb.count_downloaded_plants()    #Print Plantcount in log
-    #plantdb.load_sequences_from_app()    #Get sequences and determine the sequence id
-    #plantdb.loop_plant_points()          #Move to plant points and water them with the Water on/off sequence
+    plantdb.load_plants_from_web_app()   #Get plant points from Webapp
+    plantdb.count_downloaded_plants()    #Print Plantcount in log
+    plantdb.load_sequences_from_app()    #Get sequences and determine the sequence id
+    plantdb.loop_plant_points()          #Move to plant points and water them with the Water on/off sequence
