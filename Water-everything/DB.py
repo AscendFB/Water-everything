@@ -26,7 +26,7 @@ class DB(object):
         self.sorted_coords = {'sorted':[]}
         self.found_sequence=0
 
-        self.seq_number = []
+        self.seq_number = 0
 
         # API requests setup
         try:
@@ -105,7 +105,6 @@ class DB(object):
     def load_sequences_from_app(self):
         water_seq = []
         sequences = []
-        seq_number = []
         response = self.api_get('sequences')
         app_sequences = response.json()
         if response.status_code == 200:
@@ -119,14 +118,16 @@ class DB(object):
                    seq['id'])
                   log("Sequence found.", message_type= 'info', title= 'Water-everything')
                   self.found_sequence=1
-                else:
+                #else:
+                if self.found_sequence == 0:    
                     water_seq[:] = []
                     self.water_seq = water_seq
 #            self.seq['all_sequences'] = sequences
 #            water_seq = self.seq_number
 #            water_seq = self.water_seq
-            water_seq = [int(i) for i in water_seq]
-#           print (self.water_seq[0])
+            [int(i) for i in water_seq]
+            self.seq_number = int(i)
+            #print (self.seq_number)
 
 
 
@@ -141,7 +142,7 @@ class DB(object):
                     location=[plant['x'],plant['y'] ,0],
                     offset=[0, 0, 0],
                     speed=800)
-                   CeleryPy.execute_sequence(sequence_id=self.water_seq[0])
+                   CeleryPy.execute_sequence(sequence_id= self.seq_number)
         else:
             log("Can't find sequence called 'FW_water_everything'", message_type= 'error', title= 'Water-everything')            
 
