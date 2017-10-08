@@ -114,20 +114,19 @@ class DB(object):
                    'sequence_name': seq['name'],
                    'sequence_id' : seq['id']})
                 if seq['name'] == 'FW_water_everything':
-                  water_seq.append(
-                   seq['id'])
+                  water_seq.append(seq['id'])
                   log("Sequence found.", message_type= 'info', title= 'Water-everything')
                   self.found_sequence=1
-                #else:
+                  
+
                 if self.found_sequence == 0:    
                     water_seq[:] = []
-                    self.water_seq = water_seq
-#            self.seq['all_sequences'] = sequences
-#            water_seq = self.seq_number
-#            water_seq = self.water_seq
-            [int(i) for i in water_seq]
-            self.seq_number = int(i)
-            #print (self.seq_number)
+
+                  
+                if self.found_sequence == 1:
+                    [int(i) for i in water_seq]
+                    self.seq_number = int(i)
+
 
 
 
@@ -136,7 +135,6 @@ class DB(object):
 
     def loop_plant_points(self): 
         count = 0
-        #plant_count=len(self.plants['known'])
         if self.found_sequence == 1 :
             for plant in self.sorted_coords:
                 if count < 3:
