@@ -1,5 +1,5 @@
 {
- "package": "Water-All",
+ "package": "Water-everything",
  "language": "python",
  "author": "AscendFB",
  "description": "Waters all the plants added in Farm-Designer.",
@@ -8,5 +8,5 @@
  "url": "https://raw.githubusercontent.com/AscendFB/Water-everything/master/manifest.json",
  "zip": "https://github.com/AscendFB/Water-everything/archive/master.zip",
  "executable": "python",
- "args": ["FarmwareTests-master/Water-All/script.py"]
+ "args": ["FarmwareTests-master/Water-everything/script.py"]
 }

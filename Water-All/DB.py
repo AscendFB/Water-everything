@@ -85,7 +85,7 @@ class DB(object):
 
     def count_downloaded_plants(self):
         plant_count = len(self.plants['known'])
-        log(plant_count,message_type= 'info',title= 'Water-All')
+        log(plant_count,message_type= 'info',title= 'Water-everything')
              
        
         
@@ -102,7 +102,7 @@ class DB(object):
                  sequences.append({
                    'sequence_name': seq['name'],
                    'sequence_id' : seq['id']})
-                if seq['name'] == 'FW_water_all':
+                if seq['name'] == 'FW_water_everything':
                     water_seq.append({
                         seq['id']})
             self.seq['all_sequences'] = sequences

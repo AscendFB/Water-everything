@@ -14,7 +14,7 @@ from DB import DB
 
 if __name__ == "__main__":
 
-    log("Lets do this.", message_type='info', title='Water-All')
+    log("Lets do this.", message_type='info', title='Water-everything')
 
     
 
