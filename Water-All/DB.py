@@ -85,7 +85,8 @@ class DB(object):
 
     def count_downloaded_plants(self):
         plant_count = len(self.plants['known'])
-        log(plant_count,message_type= 'info',title= 'Water-everything')
+        log( "{} plants were detected." .format(plant_count)
+            ,message_type= 'info',title= 'Water-everything')
              
        
         
